@@ -4,7 +4,7 @@
 #include <vector>
 #include "Rect_button.h"
 
-sf::Vector2f RectButton::mouse_position;  //static var is not a part of class
+//sf::Vector2f RectButton::mouse_position;  //static var is not a part of class
 
 RectButton::RectButton(Setting& Setting, std::string name, std::string text)
     :setting(Setting),
