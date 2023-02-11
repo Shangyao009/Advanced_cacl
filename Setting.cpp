@@ -7,8 +7,3 @@ Setting::Setting()
         std::cout << "arial.ttf file load unsucessfully" << "\n";
     }
 }
-
-void Setting::update_dynamic_var()
-{
-
-}

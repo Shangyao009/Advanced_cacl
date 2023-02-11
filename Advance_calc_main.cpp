@@ -3,8 +3,10 @@
 #include <vector>
 #include "Rect_button.h"
 #include "Setting.h"
+#include "Display.h"
 
 std::vector<RectButton*> Button_vect;
+
 Setting setting;
 
 void create_button(std::string name, std::string text)
@@ -16,7 +18,8 @@ void create_button(std::string name, std::string text)
 int main()
 {
     sf::RenderWindow window(sf::VideoMode(400, 700), "Advanced Calculater");
-    RectButton button(setting,"id 1","1");
+    //RectButton button(setting,"id 1","1");
+    Display display(setting);
     while (window.isOpen())
     {
         
@@ -29,9 +32,24 @@ int main()
                 window.close();
                 break;
 
-            case sf::Event::KeyPressed:
+            /*case sf::Event::KeyPressed:
                 window.close();
                 break;
+            */
+                
+            case sf::Event::MouseButtonPressed:
+                switch (event.key.code)
+                {
+                case sf::Mouse::Left:
+                    RectButton::mouse_left_clicked = true;
+                }
+            
+            /*case sf::Event::MouseButtonReleased:
+                switch (event.key.code)
+                {
+                case sf::Mouse::Left:
+                    RectButton::mouse_left_clicked = false;
+                }*/
             }
         }
 
@@ -40,8 +58,9 @@ int main()
         RectButton::mouse_position.y = mouse_position.y;
 
         window.clear();
-        button.update_button();
-        window.draw(button);
+        //display.update_button();
+        //window.draw(button);
+        //window.draw(display);
         window.display();
     }
 

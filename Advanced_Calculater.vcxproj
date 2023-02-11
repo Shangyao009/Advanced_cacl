@@ -140,6 +140,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="calculate.cpp" />
+    <ClCompile Include="Display.cpp" />
     <ClCompile Include="func.cpp" />
     <ClCompile Include="Advance_calc_main.cpp" />
     <ClCompile Include="Rect_Button.cpp" />
@@ -147,6 +148,7 @@
     <ClCompile Include="Timer.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Display.h" />
     <ClInclude Include="func.h" />
     <ClInclude Include="Rect_button.h" />
     <ClInclude Include="Setting.h" />
