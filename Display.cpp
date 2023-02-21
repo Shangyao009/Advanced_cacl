@@ -1,46 +1,76 @@
 #include "Display.h"
 
-std::string Display::display_text;
+sf::Vector2f Display::mouse_position;
+bool Display::mouse_left_clicked;
+std::string Display::text;
 
-Display::Display(Setting& Setting, std::string name = "Display", std::string text = "")
-    :RectButton(Setting, name, text),
-    setting(Setting)
+Display::Display(Setting& Setting, std::string Name)
 {
-    x = 0.f;
-    y = 0.f;
-    shape_setup(setting.display_width,setting.display_height,x,y);
+    text = "";
+    setting = Setting;
+    button_x = setting.display_x;
+    button_y = setting.display_y;
+    name = Name;
+    display_box_length = setting.display_box_length;
+
+    set_button_size(setting.display_width, setting.display_height);
+    set_button_upleft_pos(button_x, button_y);
+    set_button_color(setting.default_color);
+
+    set_txt(text);
+    set_font(setting.font);
+    set_char_size(setting.display_font_size);
+    set_txt_color(setting.font_color);
+
+    set_txt_pos(button_x + 10.f, 0.f);
+    set_text_middle_y();
 }
 
-float Display::get_width()
+
+bool Display::check_mouse_touched() const
 {
-    return setting.display_width;
+    bool button_touched = false;
+    float mouse_x = mouse_position.x; float mouse_y = mouse_position.y;
+    if (mouse_x >= button_x && mouse_x <= button_x + setting.display_width && mouse_y >= button_y && mouse_y <= button_y + setting.display_height)
+    {
+        button_touched = true;
+    }
+    return button_touched;
 }
 
-float Display::get_height()
+bool Display::is_clicked() const
 {
-    return setting.display_height;
+    if (check_mouse_touched() && mouse_left_clicked) { return true; }
+    else { return false; }
 }
 
-void Display::draw(sf::RenderTarget& target, sf::RenderStates states) const
+void Display::update_button()
 {
-    //std::cout << "ID " << id << " RectButton is printed!" << std::endl;
-    target.draw(shape);
-    target.draw(button_text);
+    //set_upleft_position(mouse_position.x,mouse_position.y);
+    if (check_mouse_touched() == true)
+    {
+        button_shape.setFillColor(setting.touched_color);
+        if (is_clicked())
+        {
+            std::cout << "button " << name << " clicked : True \n";
+            Display::mouse_left_clicked = false;
+        }
+    }
+    else
+    {
+        button_shape.setFillColor(setting.default_color);
+    }
+    Display::mouse_left_clicked = false;
 }
 
-void Display::update_text()
+void Display::update_txt()
 {
-    Display::text = display_text;
-    text_setup();
+    set_txt(Display::text);
+    set_text_middle_y();
 }
 
-void Display::text_setup()
+void Display::update()
 {
-    //text under Class Drawable and Transformable
-    button_text.setFont(setting.font);
-    button_text.setString(text);
-    button_text.setCharacterSize(setting.font_size);
-    button_text.setFillColor(setting.font_color);
-    button_text.setPosition(sf::Vector2f(x + 10, y + 10));
-    //text.setStyle(sf::Text::Bold | sf::Text::Underlined);
+    update_txt();
+    //update_button();
 }

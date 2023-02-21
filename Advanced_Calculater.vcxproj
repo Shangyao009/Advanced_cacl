@@ -139,18 +139,23 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Button.cpp" />
+    <ClCompile Include="button_properties.cpp" />
     <ClCompile Include="calculate.cpp" />
     <ClCompile Include="Display.cpp" />
     <ClCompile Include="func.cpp" />
     <ClCompile Include="Advance_calc_main.cpp" />
-    <ClCompile Include="Rect_Button.cpp" />
+    <ClCompile Include="RectButtontest.cpp" />
     <ClCompile Include="Setting.cpp" />
     <ClCompile Include="Timer.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Button.h" />
+    <ClInclude Include="button_properties.h" />
+    <ClInclude Include="Calculate.h" />
     <ClInclude Include="Display.h" />
     <ClInclude Include="func.h" />
-    <ClInclude Include="Rect_button.h" />
+    <ClInclude Include="RectButtontest.h" />
     <ClInclude Include="Setting.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

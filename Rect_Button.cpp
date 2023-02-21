@@ -125,7 +125,7 @@ void RectButton::draw(sf::RenderTarget& target, sf::RenderStates states) const
 
 void RectButton::text_setup()
 {
-    //text under Class Drawable and Transformable
+    //text under Class Drawable and Transformable1
     button_text.setFont(setting.font);
     button_text.setString(text);
     button_text.setCharacterSize(setting.font_size);

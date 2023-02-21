@@ -4,22 +4,12 @@
 #include <string>
 #include <math.h>
 #include "func.h"
-
-#define multiply(x,y) x*y 
-#define divide(x,y) x/y
-#define sum(x,y) x+y
-#define minus(x,y) x-y
-#define power(x,y) std::pow(x,y)
-
-//stringstream
-//iomanip
+#include "Calculate.h"
 
 std::vector<std::string>ques_vec;
 std::string math_operators = "+-*/^()";
 bool error_exist = false;
-int show_decimal = 2;
 
-float calc_ques(std::string& ques_str);
 void ques_str_to_vec(std::string ques_str);
 std::string calculate_next_parentheses(std::vector<std::string> ques_vec);
 std::string calculate(std::vector<std::string>& ques_vec);
@@ -32,6 +22,7 @@ float isnum(std::string num_string);
 
 std::string ask_ques(std::string question_asked);
 std::string set_answer_decimal(float ans, int decimal);
+
 /*
 int main()
 {	
@@ -102,8 +93,10 @@ void error_report(std::string string = "")
 	::error_exist = true;
 }
 
-float calc_ques(std::string& ques_str)
+std::string calc_ques(std::string& ques_str, int show_decimal = 2)
 {
+	error_exist = false;
+	ques_vec = {};
 	ques_str_to_vec(ques_str);
 
 	std::cout << "Ques_vec: ";
@@ -112,17 +105,15 @@ float calc_ques(std::string& ques_str)
 		std::cout << element << " ";
 	}
 	std::cout << "\n";
-
 	std::string ans = calculate_next_parentheses(::ques_vec);
 	if (::error_exist)
 	{
-		std::cout << "Beyond my ability, Maybe Typo? \n\n";
-		return 0.f;
+		return "Beyond my ability, Maybe Typo? ";
 	}
 	else
 	{
 		float answer = std::stof(ans);
-		return answer;
+		return set_answer_decimal(answer,show_decimal);
 	}
 }
 
@@ -157,10 +148,11 @@ void calc_pow(std::vector<std::string>& ques_vec)
 	while (i < len && ::error_exist == false)
 	{
 		std::string element = ques_vec[i];
-		if (element == "^")
+		if (element == "^" && i !=0 && i!=len-1)
 		{
 			float left_num = isnum(ques_vec[i - 1]); float right_num = isnum(ques_vec[i + 1]);
-			float result = power(left_num, right_num);
+			power(left_num, right_num);
+			float result = left_num;
 			ques_vec[i - 1] = std::to_string(result);
 			ques_vec.erase(ques_vec.begin() + i + 1);
 			ques_vec.erase(ques_vec.begin() + i);
@@ -177,7 +169,7 @@ void calc_multiply_divide(std::vector<std::string>& ques_vec)
 	while (i < len && ::error_exist == false)
 	{
 		std::string element = ques_vec[i];
-		if (element == "*" || element == "/")
+		if ((element == "*" || element == "/") && (i != 0 && i != len - 1))
 		{
 			float left_num = isnum(ques_vec[i - 1]); float right_num = isnum(ques_vec[i + 1]);
 			float result = element == "*" ? multiply(left_num, right_num) : divide(left_num, right_num);
@@ -193,13 +185,34 @@ void calc_multiply_divide(std::vector<std::string>& ques_vec)
 
 void calc_plus_minus(std::vector<std::string>& ques_vec)
 {
-	int len = ques_vec.size(); int i = 0;
+	if (ques_vec[0] == "-")
+	{
+		if (ques_vec.size() == 1)
+		{
+			error_report();
+		}
+		else
+		{
+			float num = isnum(ques_vec[1]);
+			num *= -1;
+			ques_vec[1] = std::to_string(num);
+			ques_vec.erase(ques_vec.begin());
+		}
+	}
+	else if (ques_vec[0] == "+")
+	{
+		ques_vec.erase(ques_vec.begin());
+	}
+
+	int len = ques_vec.size(); 
+	int i = 0;
 	while (i < len && ::error_exist == false)
 	{
 		std::string element = ques_vec[i];
-		if (element == "+" || element == "-")
+		if ((element == "+" || element == "-") && (i != len-1))
 		{
-			float left_num = isnum(ques_vec[i - 1]); float right_num = isnum(ques_vec[i + 1]);
+			float left_num = isnum(ques_vec[i - 1]); 
+			float right_num = isnum(ques_vec[i + 1]);
 			float result = element == "+" ? sum(left_num, right_num) : minus(left_num, right_num);
 			ques_vec[i - 1] = std::to_string(result);
 			ques_vec.erase(ques_vec.begin() + i + 1);

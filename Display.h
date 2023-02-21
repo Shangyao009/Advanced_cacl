@@ -1,16 +1,20 @@
 #pragma once
-#include "Rect_button.h"
+#include "Button.h"
+#include "Setting.h"
 
-class Display :
-	public RectButton
+class Display
+    : public Button
 {
 public:
-	static std::string display_text;
-	Setting setting;
-	Display(Setting& Setting, std::string name, std::string text);
-	float get_width();
-	float get_height();
-	void update_text();
-	void text_setup();
-	void draw(sf::RenderTarget& target, sf::RenderStates states) const;
+    float display_box_length;
+    static sf::Vector2f mouse_position;
+    static bool mouse_left_clicked;
+    static std::string text;
+
+    Display(Setting& setting, std::string name);
+    bool check_mouse_touched() const;
+    bool is_clicked() const;
+    void update_button();
+    void update_txt();
+    void update();
 };
