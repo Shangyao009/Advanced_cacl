@@ -1,7 +1,42 @@
-﻿  calculate.cpp
-C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.34.31933\include\format(43): warning STL4038: The contents of <format> are available only with C++20 or later.
-C:\Users\shang\Desktop\vs\cpp\Advanced_Calculater\calculate.cpp(54,20): warning C4018: '<': signed/unsigned mismatch
-C:\Users\shang\Desktop\vs\cpp\Advanced_Calculater\calculate.cpp(79,20): warning C4018: '<': signed/unsigned mismatch
-C:\Users\shang\Desktop\vs\cpp\Advanced_Calculater\calculate.cpp(255,21): warning C4018: '<': signed/unsigned mismatch
-C:\Users\shang\Desktop\vs\cpp\Advanced_Calculater\calculate.cpp(261,27): warning C4018: '<': signed/unsigned mismatch
+﻿  Advance_calc_main.cpp
+C:\Users\shang\Desktop\vs\cpp\Advanced_Calculater\Advance_calc_main.cpp(31,74): warning C4244: 'argument': conversion from 'float' to 'unsigned int', possible loss of data
+C:\Users\shang\Desktop\vs\cpp\Advanced_Calculater\Advance_calc_main.cpp(31,51): warning C4244: 'argument': conversion from 'float' to 'unsigned int', possible loss of data
+C:\Users\shang\Desktop\vs\cpp\Advanced_Calculater\Advance_calc_main.cpp(71,58): warning C4244: '=': conversion from 'T' to 'T', possible loss of data
+          with
+          [
+              T=int
+          ]
+          and
+          [
+              T=float
+          ]
+C:\Users\shang\Desktop\vs\cpp\Advanced_Calculater\Advance_calc_main.cpp(72,58): warning C4244: '=': conversion from 'T' to 'T', possible loss of data
+          with
+          [
+              T=int
+          ]
+          and
+          [
+              T=float
+          ]
+C:\Users\shang\Desktop\vs\cpp\Advanced_Calculater\Advance_calc_main.cpp(73,51): warning C4244: '=': conversion from 'T' to 'T', possible loss of data
+          with
+          [
+              T=int
+          ]
+          and
+          [
+              T=float
+          ]
+C:\Users\shang\Desktop\vs\cpp\Advanced_Calculater\Advance_calc_main.cpp(74,51): warning C4244: '=': conversion from 'T' to 'T', possible loss of data
+          with
+          [
+              T=int
+          ]
+          and
+          [
+              T=float
+          ]
+  RectButtontest.cpp
+  Generating Code...
   Advanced_Calculater.vcxproj -> C:\Users\shang\Desktop\vs\cpp\Advanced_Calculater\Debug\Advanced_Calculater.exe

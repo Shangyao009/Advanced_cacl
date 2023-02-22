@@ -1,15 +1,22 @@
 #pragma once
 #include <iostream>
 #include <array>
+#include <algorithm>
+#include <vector>
 #include <string>
 #include "Setting.h"
 #include <SFML/Graphics.hpp>
+#include <functional>
+#include <map>
+
 //class , struct , datatype
-static const char num_button[] = "0123456789";
-static char operators_button[] = "+-*/()^.=";
-constexpr int total = sizeof(num_button) - 1 + sizeof(operators_button) - 1;
-static std::string total_button = std::string(num_button )+ std::string(operators_button);
+static const std::string num_button[] = {"0","1","2","3","4","5","6","7","8","9"};
+static const std::string operators_button[] = { "+","-","*","/","(",")","^",".","=" };
+static constexpr int size_num_button = sizeof(num_button) / sizeof(*num_button);
+static constexpr int size_operators_button = sizeof(operators_button) / sizeof(*operators_button);
+constexpr int total = size_num_button + size_operators_button;
 
 std::array<std::string,total > get_Rect_buts_name_arr();
 std::array<std::string, total> get_Rect_buts_txt_arr();
 std::array<sf::Vector2f, total> get_Rect_buts_pos_arr(Setting &setting);
+std::function<void(std::string& text, std::string& name)> get_buts_when_clicked_arr();

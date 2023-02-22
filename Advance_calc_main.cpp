@@ -15,7 +15,7 @@ void create_buttons()
     std::array<std::string, total> Rect_button_name_array = get_Rect_buts_name_arr();
     std::array<std::string, total> Rect_button_text_array = get_Rect_buts_txt_arr();
     std::array<sf::Vector2f, total> Rect_button_pos_array = get_Rect_buts_pos_arr(_setting);
-    for (int i = 0; i < total_button.length(); i++)
+    for (int i = 0; i < total; i++)
     {
         std::string name = Rect_button_name_array[i];
         std::string text = Rect_button_text_array[i];
@@ -42,7 +42,7 @@ int main()
             {
             case sf::Event::Closed:
                 window.close();
-                break;
+                return 0;
 
             /*
             case sf::Event::KeyPressed:
@@ -77,7 +77,7 @@ int main()
         display.update();
         for (RectButtonTest button : Buttons)
         { 
-            button.update_button();
+            (button).update_button();
             window.draw(button);
         }
         RectButtonTest::mouse_left_clicked = false;
