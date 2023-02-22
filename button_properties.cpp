@@ -62,8 +62,3 @@ std::array<sf::Vector2f, total> get_Rect_buts_pos_arr(Setting& setting)
 //{
 //	std::map < std::string, std::function<void(std::string& text, std::string& name)>> buts_when_clicked_func_map;
 //}
-
-void equal_but_func(std::string text,std::string name)
-{
-	
-}

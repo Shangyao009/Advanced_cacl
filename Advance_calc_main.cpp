@@ -5,10 +5,10 @@
 #include "Display.h"
 #include "RectButtontest.h"
 #include "button_properties.h"
+#include <map>
 
-std::vector<RectButtonTest> Buttons;
+std::vector<RectButtonTest*> Buttons;
 Setting _setting;
-
 
 void create_buttons()
 {
@@ -21,11 +21,12 @@ void create_buttons()
         std::string text = Rect_button_text_array[i];
         float x = Rect_button_pos_array[i].x;
         float y = Rect_button_pos_array[i].y;
-        RectButtonTest Button(name, text, x, y);
-        Buttons.push_back(Button);
+        
+        Buttons.emplace_back(new RectButtonTest (name, text, x, y)); //class directly create in the certain place in the vector
+        //"this" will change if we not use new as it will just push back a copy with same value but different memory location
+        //if didn't use new --> the Class we created will disappear when it quit this scope --> store at stack
     }
 }
-
 int main()
 {
     sf::RenderWindow window(sf::VideoMode(_setting.window_width, _setting.window_height), "Advanced Calculater");
@@ -42,6 +43,10 @@ int main()
             {
             case sf::Event::Closed:
                 window.close();
+                for (RectButtonTest* button : Buttons)
+                {
+                    delete button;
+                }
                 return 0;
 
             /*
@@ -75,10 +80,10 @@ int main()
 
         window.clear();
         display.update();
-        for (RectButtonTest button : Buttons)
+        for (RectButtonTest *button : Buttons)
         { 
-            (button).update_button();
-            window.draw(button);
+            (*button).update_button();
+            window.draw(*button);
         }
         RectButtonTest::mouse_left_clicked = false;
         window.draw(display);

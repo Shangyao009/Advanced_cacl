@@ -27,6 +27,13 @@ RectButtonTest::RectButtonTest(std::string Name, std::string Text, float x,float
     set_char_size(setting.button_font_size);
     set_txt_color(setting.font_color);
     set_text_center();
+    std::function<void(void)> func = [this]() {when_clicked_default(); };
+    set_when_clicked_func(func);
+}
+
+void RectButtonTest::set_when_clicked_func(std::function<void(void)> &func)
+{
+    when_clicked_ = func;
 }
 
 bool RectButtonTest::check_mouse_touched() const
@@ -51,23 +58,22 @@ void RectButtonTest::update_button()
     //set_upleft_position(mouse_position.x,mouse_position.y);
     if (check_mouse_touched() == true)
     {
-        set_button_color(setting.touched_color);
+        button_shape.setFillColor(setting.touched_color);
         if (is_clicked())
         {
-            when_clicked_= [this](){this->when_clicked_default(); };
             when_clicked_();
         }
     }
     else
     {
-        set_button_color(setting.default_color);
+        button_shape.setFillColor(setting.default_color);
     }
     //RectButtonTest::mouse_left_clicked = false;
 }
 
 void RectButtonTest::when_clicked_default()
 {
-    if (text == "=")
+    if (this->text == "=")
     {
         std::cout << "button " << name << " clicked : True \n";
         if (display_clear)
