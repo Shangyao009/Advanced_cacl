@@ -29,15 +29,19 @@ RectButtonTest::RectButtonTest(std::string Name, std::string Text, float x,float
     set_text_center();
     if (text == "=")
     {
-        when_clicked_ = [this]() {when_clicked_equal(); };
+        when_clicked_ = [this]() {std::cout << "button " << name << " clicked : True \n"; when_clicked_equal(); };
     }
     else if (text == "del")
     {
-        when_clicked_ = [this]() {when_clicked_del(); };
+        when_clicked_ = [this]() {std::cout << "button " << name << " clicked : True \n";  when_clicked_del(); };
+    }
+    else if (text == "cls")
+    {
+        when_clicked_ = [this]() {std::cout << "button " << name << " clicked : True \n"; when_clicked_cls(); };
     }
     else
     {
-        when_clicked_ = [this]() {when_clicked_default(); };
+        when_clicked_ = [this]() {std::cout << "button " << name << " clicked : True \n"; when_clicked_default(); };
     }
     
 }
@@ -90,14 +94,12 @@ void RectButtonTest::when_clicked_default()
         Display::text = "";
         display_clear = false;
     }
-    std::cout << "button " << name << " clicked : True \n";
     Display::ques_vec.push_back(text);
     Display::text += text;
 }
 
 void RectButtonTest::when_clicked_del()
 {
-    std::cout << "button " << name << " clicked : True \n";
     if (display_clear)
     {
         Display::ques_vec = {};
@@ -117,13 +119,22 @@ void RectButtonTest::when_clicked_del()
 
 void RectButtonTest::when_clicked_equal()
 {
-    std::cout << "button " << name << " clicked : True \n";
     if (display_clear)
     {
         Display::ques_vec = {};
         Display::text = "";
         return;
     }
-    Display::text = calc_ques(Display::ques_vec, setting.ans_show_decimal);
+    if (Display::ques_vec.size() > 0)
+    {
+        Display::text = calc_ques(Display::ques_vec, setting.ans_show_decimal);
+    }
     display_clear = true;
+}
+
+void RectButtonTest::when_clicked_cls()
+{
+    Display::ques_vec = {};
+    Display::text = "";
+    display_clear = false;
 }

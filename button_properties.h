@@ -11,7 +11,7 @@
 
 //class , struct , datatype
 static const std::string num_button[] = {"0","1","2","3","4","5","6","7","8","9"};
-static const std::string operators_button[] = { "+","-","*","/","(",")","^",".","del","="};
+static const std::string operators_button[] = { "+","-","*","/","(",")","^",".","del" ,"cls","="};
 static constexpr int size_num_button = sizeof(num_button) / sizeof(*num_button);
 static constexpr int size_operators_button = sizeof(operators_button) / sizeof(*operators_button);
 constexpr int total = size_num_button + size_operators_button;

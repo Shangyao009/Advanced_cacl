@@ -12,7 +12,6 @@ public:
     static bool display_clear;
     std::string text;
 
-    void when_clicked_default();
     std::function<void(void)> when_clicked_; //map
     //functor --> class act as a func --> as it overload/overide operator(Ex:({[,) to run certain func
     // [] --> if x this, func can't recognice when_clicked as it is in class,
@@ -31,8 +30,11 @@ public:
     void update_button();
     //void set_when_clicked_func(std::function<void(void)>& func);
     //void draw(sf::RenderTarget& target, sf::RenderStates states) const;
+    void when_clicked_default();
     void when_clicked_equal();
     void when_clicked_del();
+    void when_clicked_cls();
+
 };
 
 

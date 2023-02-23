@@ -10,7 +10,7 @@ std::vector<std::string>ques_vec;
 std::vector<std::string> math_operators = { "+","-", "*","/","^","(",")" };
 bool error_exist = false;
 
-void process_ques_vec(std::vector<std::string> Ques_vec);
+void preprocess_ques_vec(std::vector<std::string> Ques_vec);
 void ques_str_to_vec(std::string ques_str);
 std::string calculate_next_parentheses(std::vector<std::string> ques_vec);
 std::string calculate(std::vector<std::string>& ques_vec);
@@ -99,7 +99,7 @@ std::string calc_ques(std::vector<std::string> Ques_vec,
 {
 	error_exist = false;
 	::ques_vec = {};
-	process_ques_vec(Ques_vec);
+	preprocess_ques_vec(Ques_vec);
 	//ques_vec = {}
 	//ques_str_to_vec(ques_str);
 
@@ -121,7 +121,7 @@ std::string calc_ques(std::vector<std::string> Ques_vec,
 	}
 }
 
-void process_ques_vec(std::vector<std::string> Ques_vec)
+void preprocess_ques_vec(std::vector<std::string> Ques_vec)
 {
 	std::string num_str;
 	for (unsigned int i = 0; i < Ques_vec.size(); i++)
@@ -143,6 +143,9 @@ void process_ques_vec(std::vector<std::string> Ques_vec)
 			::ques_vec.push_back(Ques_vec[i]);
 		}
 	}
+	//check available ques
+	//add addition rules such as 9(7) = 9*(7)
+
 }
 
 void ques_str_to_vec(std::string ques_str)
