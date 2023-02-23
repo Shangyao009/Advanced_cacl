@@ -7,9 +7,10 @@
 #include "Calculate.h"
 
 std::vector<std::string>ques_vec;
-std::string math_operators = "+-*/^()";
+std::vector<std::string> math_operators = { "+","-", "*","/","^","(",")" };
 bool error_exist = false;
 
+void process_ques_vec(std::vector<std::string> Ques_vec);
 void ques_str_to_vec(std::string ques_str);
 std::string calculate_next_parentheses(std::vector<std::string> ques_vec);
 std::string calculate(std::vector<std::string>& ques_vec);
@@ -93,11 +94,14 @@ void error_report(std::string string = "")
 	::error_exist = true;
 }
 
-std::string calc_ques(std::string& ques_str, int show_decimal = 2)
+std::string calc_ques(std::vector<std::string> Ques_vec, 
+	int show_decimal)
 {
 	error_exist = false;
-	ques_vec = {};
-	ques_str_to_vec(ques_str);
+	::ques_vec = {};
+	process_ques_vec(Ques_vec);
+	//ques_vec = {}
+	//ques_str_to_vec(ques_str);
 
 	std::cout << "Ques_vec: ";
 	for (std::string element : ::ques_vec)
@@ -117,13 +121,37 @@ std::string calc_ques(std::string& ques_str, int show_decimal = 2)
 	}
 }
 
+void process_ques_vec(std::vector<std::string> Ques_vec)
+{
+	std::string num_str;
+	for (unsigned int i = 0; i < Ques_vec.size(); i++)
+	{	//find operator
+		if (std::find(::math_operators.begin(),math_operators.end(),Ques_vec[i]) == math_operators.end())
+		{
+			num_str += Ques_vec[i];
+			if (i == Ques_vec.size() - 1)
+			{
+				::ques_vec.push_back(num_str);
+			}
+		}
+		else if (std::find(::math_operators.begin(), math_operators.end(), Ques_vec[i]) != math_operators.end())
+		{
+			if (num_str != "") {
+				::ques_vec.push_back(num_str);
+				num_str = "";
+			}
+			::ques_vec.push_back(Ques_vec[i]);
+		}
+	}
+}
+
 void ques_str_to_vec(std::string ques_str)
 {
 	std::string num_str;
 	strip(ques_str);
 	for (unsigned int i = 0; i < ques_str.length(); i++)
 	{	//find operator
-		if (::math_operators.find(ques_str[i]) == std::string::npos && ques_str[i] != ' ')
+		if (std::find(::math_operators.begin(), math_operators.end(), std::to_string(ques_str[i])) == math_operators.end() && ques_str[i] != ' ')
 		{
 			num_str.push_back(ques_str[i]);
 			if (i == ques_str.length() - 1)
@@ -131,7 +159,7 @@ void ques_str_to_vec(std::string ques_str)
 				::ques_vec.push_back(num_str);
 			}
 		}
-		else if (::math_operators.find(ques_str[i]) != std::string::npos)
+		else if (std::find(::math_operators.begin(), math_operators.end(), std::to_string(ques_str[i])) != math_operators.end())
 		{
 			if (num_str != "") {
 				::ques_vec.push_back(num_str);
@@ -265,7 +293,7 @@ std::string calculate_next_parentheses(std::vector<std::string> ques_vec)
 					{
 						parentheses_index += 1;
 					}
-					else if (ques_vec[i + n] == ")")  
+					else if (ques_vec[i + n] == ")")
 					{
 						parentheses_index -= 1;
 						if (parentheses_index < 0) { error_report("Inappropriate Parentheses ! "); return ""; }  //raise exception for (ex: ()) )

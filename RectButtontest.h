@@ -29,9 +29,10 @@ public:
     bool check_mouse_touched() const;
     bool is_clicked() const;
     void update_button();
-    void set_when_clicked_func(std::function<void(void)>& func);
+    //void set_when_clicked_func(std::function<void(void)>& func);
     //void draw(sf::RenderTarget& target, sf::RenderStates states) const;
-    
+    void when_clicked_equal();
+    void when_clicked_del();
 };
 
 

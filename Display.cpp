@@ -1,8 +1,10 @@
 #include "Display.h"
+#include <vector>
 
 sf::Vector2f Display::mouse_position;
 bool Display::mouse_left_clicked;
 std::string Display::text;
+std::vector<std::string> Display::ques_vec;
 
 Display::Display(Setting& Setting, std::string Name)
 {

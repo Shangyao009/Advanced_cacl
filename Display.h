@@ -10,6 +10,7 @@ public:
     static sf::Vector2f mouse_position;
     static bool mouse_left_clicked;
     static std::string text;
+    static std::vector<std::string> ques_vec;
 
     Display(Setting& setting, std::string name);
     bool check_mouse_touched() const;

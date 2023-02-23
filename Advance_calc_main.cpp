@@ -15,6 +15,8 @@ void create_buttons()
     std::array<std::string, total> Rect_button_name_array = get_Rect_buts_name_arr();
     std::array<std::string, total> Rect_button_text_array = get_Rect_buts_txt_arr();
     std::array<sf::Vector2f, total> Rect_button_pos_array = get_Rect_buts_pos_arr(_setting);
+    //std::array<std::function<void(void)> > Rect_button_func_map = get_but_func_arr();
+
     for (int i = 0; i < total; i++)
     {
         std::string name = Rect_button_name_array[i];
@@ -26,6 +28,7 @@ void create_buttons()
         //"this" will change if we not use new as it will just push back a copy with same value but different memory location
         //if didn't use new --> the Class we created will disappear when it quit this scope --> store at stack
     }
+    
 }
 int main()
 {

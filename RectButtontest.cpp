@@ -27,14 +27,25 @@ RectButtonTest::RectButtonTest(std::string Name, std::string Text, float x,float
     set_char_size(setting.button_font_size);
     set_txt_color(setting.font_color);
     set_text_center();
-    std::function<void(void)> func = [this]() {when_clicked_default(); };
-    set_when_clicked_func(func);
+    if (text == "=")
+    {
+        when_clicked_ = [this]() {when_clicked_equal(); };
+    }
+    else if (text == "del")
+    {
+        when_clicked_ = [this]() {when_clicked_del(); };
+    }
+    else
+    {
+        when_clicked_ = [this]() {when_clicked_default(); };
+    }
+    
 }
 
-void RectButtonTest::set_when_clicked_func(std::function<void(void)> &func)
-{
-    when_clicked_ = func;
-}
+//void RectButtonTest::set_when_clicked_func(std::function<void(void)> &func)
+//{
+//    when_clicked_ = func;
+//}
 
 bool RectButtonTest::check_mouse_touched() const
 {
@@ -73,26 +84,46 @@ void RectButtonTest::update_button()
 
 void RectButtonTest::when_clicked_default()
 {
-    if (this->text == "=")
+    if (display_clear) 
     {
-        std::cout << "button " << name << " clicked : True \n";
-        if (display_clear)
-        {
-            Display::text = "";
-            return;
-        }
-        
-        Display::text = calc_ques(Display::text, setting.ans_show_decimal);
-        display_clear = true;
+        Display::ques_vec = {};
+        Display::text = "";
+        display_clear = false;
     }
-    else 
+    std::cout << "button " << name << " clicked : True \n";
+    Display::ques_vec.push_back(text);
+    Display::text += text;
+}
+
+void RectButtonTest::when_clicked_del()
+{
+    std::cout << "button " << name << " clicked : True \n";
+    if (display_clear)
     {
-        if (display_clear) 
-        {
-            Display::text = "";
-            display_clear = false;
-        }
-        std::cout << "button " << name << " clicked : True \n";
-        Display::text += text;
+        Display::ques_vec = {};
+        Display::text = "";
+        display_clear = false;
+        return;
     }
+    if (Display::ques_vec.size() != 0)
+    {
+        int len_vec = Display::ques_vec.size();
+        int len = Display::ques_vec[len_vec-1].length();
+        int len_text = Display::text.length();
+        Display::text = Display::text.substr(0,len_text-len);
+        Display::ques_vec.erase(Display::ques_vec.begin() + len_vec - 1);
+    }
+}
+
+void RectButtonTest::when_clicked_equal()
+{
+    std::cout << "button " << name << " clicked : True \n";
+    if (display_clear)
+    {
+        Display::ques_vec = {};
+        Display::text = "";
+        return;
+    }
+    Display::text = calc_ques(Display::ques_vec, setting.ans_show_decimal);
+    display_clear = true;
 }

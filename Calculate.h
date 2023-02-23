@@ -9,4 +9,4 @@
 //stringstream
 //iomanip
 
-std::string calc_ques(std::string& ques_str, int show_decimal);
+std::string calc_ques(std::vector<std::string> Ques_vec, int show_decimal = 2);

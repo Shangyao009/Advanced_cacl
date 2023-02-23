@@ -57,8 +57,3 @@ std::array<sf::Vector2f, total> get_Rect_buts_pos_arr(Setting& setting)
 	}
 	return Rect_button_pos_array;
 }
-
-//std::map < std::string, std::function<void(std::string& text, std::string& name)>> get_buts_when_clicked_map()
-//{
-//	std::map < std::string, std::function<void(std::string& text, std::string& name)>> buts_when_clicked_func_map;
-//}
