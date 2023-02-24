@@ -10,6 +10,7 @@ public:
     static sf::Vector2f mouse_position;
     static bool mouse_left_clicked;
     static bool display_clear;
+    static std::string previous_ans;
     std::string text;
 
     std::function<void(void)> when_clicked_; //map
@@ -34,6 +35,7 @@ public:
     void when_clicked_equal();
     void when_clicked_del();
     void when_clicked_cls();
+    void when_clicked_ans();
 
 };
 

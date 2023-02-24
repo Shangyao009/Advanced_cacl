@@ -7,6 +7,7 @@ sf::Vector2f RectButtonTest::mouse_position;
 bool RectButtonTest::mouse_left_clicked;
 bool RectButtonTest::display_clear;
 Setting RectButtonTest::setting;
+std::string RectButtonTest::previous_ans;
 
 RectButtonTest::RectButtonTest(std::string Name, std::string Text, float x,float y)
     //std::function<void(RectButtonTest& RectButton)> &func)
@@ -38,6 +39,10 @@ RectButtonTest::RectButtonTest(std::string Name, std::string Text, float x,float
     else if (text == "cls")
     {
         when_clicked_ = [this]() {std::cout << "button " << name << " clicked : True \n"; when_clicked_cls(); };
+    }
+    else if (text == "Ans")
+    {
+        when_clicked_ = [this]() {std::cout << "button " << name << " clicked : True \n"; when_clicked_ans(); };
     }
     else
     {
@@ -128,6 +133,8 @@ void RectButtonTest::when_clicked_equal()
     if (Display::ques_vec.size() > 0)
     {
         Display::text = calc_ques(Display::ques_vec, setting.ans_show_decimal);
+        previous_ans = Display::text;
+        std::cout << "Previous Ans : " << previous_ans + "\n";
     }
     display_clear = true;
 }
@@ -136,5 +143,22 @@ void RectButtonTest::when_clicked_cls()
 {
     Display::ques_vec = {};
     Display::text = "";
+    previous_ans = "";
     display_clear = false;
+}
+
+void RectButtonTest::when_clicked_ans()
+{
+    if (display_clear)
+    {
+        Display::ques_vec = {};
+        Display::text = "";
+        display_clear = false;
+    }
+    if (previous_ans != "")
+    {
+        std::cout << "Previous Ans = " << previous_ans + "\n";
+        Display::ques_vec.push_back(previous_ans);
+        Display::text += text;
+    }
 }

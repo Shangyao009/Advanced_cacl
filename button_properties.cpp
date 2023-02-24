@@ -44,7 +44,7 @@ std::array<sf::Vector2f, total> get_Rect_buts_pos_arr(Setting& setting)
 {
 	std::array<sf::Vector2f, total>Rect_button_pos_array;
 	float x = 15.f;
-	float y = 90.f;
+	float y = 120.f;
 	for (int i = 0; i < total; i++)
 	{
 		sf::Vector2f pos;

@@ -22,10 +22,14 @@ Display::Display(Setting& Setting, std::string Name)
     set_txt(text);
     set_font(setting.font);
     set_char_size(setting.display_font_size);
-    set_txt_color(setting.font_color);
+    set_txt_color(setting.display_font_color);
 
     set_txt_pos(button_x + 10.f, 0.f);
     set_text_middle_y();
+    std::string filename = "../bg_pic2.jpg";
+    std::cout << "display texture success: " << display_texture.loadFromFile(filename) << "\n";
+    button_shape.setTexture(new sf::Texture(display_texture));
+    button_shape.setTextureRect(sf::IntRect(0, 0, setting.display_width/1.5, setting.display_height/1.5));
 }
 
 

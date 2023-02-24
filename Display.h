@@ -13,6 +13,7 @@ public:
     static std::vector<std::string> ques_vec;
 
     Display(Setting& setting, std::string name);
+    sf::Texture display_texture;
     bool check_mouse_touched() const;
     bool is_clicked() const;
     void update_button();
